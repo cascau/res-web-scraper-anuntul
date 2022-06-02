@@ -1,0 +1,62 @@
+{"properties": [
+  {
+    "name": "jobs.offer.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'jobs.offer.enabled'"
+  },
+  {
+    "name": "jobs.landing.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'jobs.landing.enabled'"
+  },
+  {
+    "name": "jobs.dbtrans.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'jobs.dbtrans.enabled'"
+  },
+  {
+    "name": "anuntul.sp.max_pages",
+    "type": "java.lang.String",
+    "description": "A description for 'anuntul.sp.max_pages'"
+  },
+  {
+    "name": "anuntul.sp.batch_size",
+    "type": "java.lang.String",
+    "description": "A description for 'anuntul.sp.batch_size'"
+  },
+  {
+    "name": "anuntul.sp.initial_delay",
+    "type": "java.lang.String",
+    "description": "A description for 'anuntul.sp.initial_delay'"
+  },
+  {
+    "name": "anuntul.sp.start_rate",
+    "type": "java.lang.String",
+    "description": "A description for 'anuntul.sp.start_rate'"
+  },
+  {
+    "name": "anuntul.lp.initial_delay",
+    "type": "java.lang.String",
+    "description": "A description for 'anuntul.lp.initial_delay'"
+  },
+  {
+    "name": "anuntul.lp.start_rate",
+    "type": "java.lang.String",
+    "description": "A description for 'anuntul.lp.start_rate'"
+  },
+  {
+    "name": "anuntul.tr.batch_size",
+    "type": "java.lang.String",
+    "description": "A description for 'anuntul.tr.batch_size'"
+  },
+  {
+    "name": "anuntul.tr.initial_delay",
+    "type": "java.lang.String",
+    "description": "A description for 'anuntul.tr.initial_delay'"
+  },
+  {
+    "name": "anuntul.tr.start_rate",
+    "type": "java.lang.String",
+    "description": "A description for 'anuntul.tr.start_rate'"
+  }
+]}
