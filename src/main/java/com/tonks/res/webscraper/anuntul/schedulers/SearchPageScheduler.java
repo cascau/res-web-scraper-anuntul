@@ -1,12 +1,14 @@
 package com.tonks.res.webscraper.anuntul.schedulers;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 
-import org.jsoup.select.Elements;
+import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,18 @@ public class SearchPageScheduler {
 	private static final Logger logger = LoggerFactory.getLogger(SearchPageScheduler.class);
 
 	private static final Set<String> SEARCH_URLS = new HashSet<>();
-	public static final String ANUNTUL_SELL_URL = "https://www.anuntul.ro/anunturi-imobiliare-vanzari/?page=";
-	public static final String ANUNTUL_RENT_URL = "https://www.anuntul.ro/anunturi-imobiliare-inchirieri/?page=";
-
+	public static final String ANUNTUL_SELL_1ROOM_URL = "https://www.anuntul.ro/anunturi-imobiliare-vanzari/garsoniere/?page=";
+	public static final String ANUNTUL_SELL_2ROOM_URL = "https://www.anuntul.ro/anunturi-imobiliare-vanzari/apartamente-2-camere/?page=";
+	public static final String ANUNTUL_SELL_3ROOM_URL = "https://www.anuntul.ro/anunturi-imobiliare-vanzari/apartamente-3-camere/?page=";
+	public static final String ANUNTUL_SELL_4ROOM_URL = "https://www.anuntul.ro/anunturi-imobiliare-vanzari/apartamente-4-camere/?page=";
+	public static final String ANUNTUL_SELL_HOUSE_URL = "https://www.anuntul.ro/anunturi-imobiliare-vanzari/case-vile/?page=";
+	
+	public static final String ANUNTUL_RENT_1ROOM_URL = "https://www.anuntul.ro/anunturi-imobiliare-inchirieri/garsoniere/?page=";
+	public static final String ANUNTUL_RENT_2ROOM_URL = "https://www.anuntul.ro/anunturi-imobiliare-inchirieri/apartamente-2-camere/?page=";
+	public static final String ANUNTUL_RENT_3ROOM_URL = "https://www.anuntul.ro/anunturi-imobiliare-inchirieri/apartamente-3-camere/?page=";
+	public static final String ANUNTUL_RENT_4ROOM_URL = "https://www.anuntul.ro/anunturi-imobiliare-inchirieri/apartamente-4-camere/?page=";
+	public static final String ANUNTUL_RENT_HOUSE_URL = "https://www.anuntul.ro/anunturi-imobiliare-inchirieri/case-vile/?page=";
+	
 	@Value("${jobs.offer.enabled}")
 	private boolean jobEnabled;
 
@@ -37,8 +48,17 @@ public class SearchPageScheduler {
 	private int MAX_PAGES;
 
 	static {
-		SEARCH_URLS.add(ANUNTUL_SELL_URL);
-		SEARCH_URLS.add(ANUNTUL_RENT_URL);
+		SEARCH_URLS.add(ANUNTUL_SELL_1ROOM_URL);
+		SEARCH_URLS.add(ANUNTUL_SELL_2ROOM_URL);
+		SEARCH_URLS.add(ANUNTUL_SELL_3ROOM_URL);
+		SEARCH_URLS.add(ANUNTUL_SELL_4ROOM_URL);
+		SEARCH_URLS.add(ANUNTUL_SELL_HOUSE_URL);
+		
+		SEARCH_URLS.add(ANUNTUL_RENT_1ROOM_URL);
+		SEARCH_URLS.add(ANUNTUL_RENT_2ROOM_URL);
+		SEARCH_URLS.add(ANUNTUL_RENT_3ROOM_URL);
+		SEARCH_URLS.add(ANUNTUL_RENT_4ROOM_URL);
+		SEARCH_URLS.add(ANUNTUL_RENT_HOUSE_URL);
 	}
 
 	@Autowired
@@ -61,7 +81,7 @@ public class SearchPageScheduler {
 
 			IntStream.range(1, MAX_PAGES + 1).parallel().forEach(pageNb -> {
 
-				Elements tables = new Elements();
+				List<Element> tables = new ArrayList<>();
 				SEARCH_URLS.forEach(url -> {
 					tables.addAll(scrapper.findOffers(url + pageNb));
 				});
