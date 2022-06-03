@@ -51,7 +51,7 @@ public class SearchPageService {
 
 	@Transactional
 	public Page<SearchPage> findOffersAfterDate(Date date, Pageable pageable) {
-		return repository.findByUrlContainingAndDateAddedAfter("storia.ro", date, pageable);
+		return repository.findByUrlContainingAndDateAddedAfter("anuntul.ro", date, pageable);
 	}
 	
 	@Transactional

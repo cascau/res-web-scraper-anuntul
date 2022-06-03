@@ -35,6 +35,7 @@ public class OfferService {
 		advert.setDateAdded(page.getDateAdded());
 		advert.setDateSold(null);
 		advert.setDescription(page.getDescription());
+		advert.setPictures(page.getPictures());
 		advert.setPrice(page.getPrice());
 		advert.setTitle(page.getTitle());
 		advert.setType(page.getOfferType());
@@ -43,15 +44,15 @@ public class OfferService {
 		offer.setProperty(property);
 		property.setOffer(offer);
 		property.setCity(page.getCity());
-		property.setCondition(page.getCondition());
+		property.setCondition(null);
 		property.setCounty(page.getCounty());
-		property.setFloorNumber(page.getFloorNumber());
+		property.setFloorNumber(null);
 		property.setLatitude(page.getLatitude());
 		property.setLongitude(page.getLongitude());
 		property.setNeighborhood(page.getNeighborhood());
 		property.setPartitioning(page.getPartitioning());
-		property.setRoomsNumber(page.getRoomsNumber());
-		property.setTotalFloors(page.getTotalFloors());
+		property.setRoomsNumber(null);
+		property.setTotalFloors(null);
 		property.setType(page.getPropertyType());
 		property.setUseableSurface(page.getUseableSurface());
 		property.setYearBuilt(page.getYearBuilt());
@@ -59,9 +60,9 @@ public class OfferService {
 		Seller seller = new Seller();
 		offer.setSeller(seller);
 		seller.setOffer(offer);
-		seller.setName(page.getSellerName());
+		seller.setName(null);
 		seller.setPhone(null);
-		seller.setType(page.getSellerType());
+		seller.setType(null);
 
 		return offer;
 	}

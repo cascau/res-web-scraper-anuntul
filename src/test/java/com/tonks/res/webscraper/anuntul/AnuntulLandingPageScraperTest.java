@@ -23,7 +23,7 @@ public class AnuntulLandingPageScraperTest {
 	
 	@Test
 	public void testGenerateLandingPageInfo() throws IOException {
-		String link = "https://www.anuntul.ro/anunt-vanzare-apartament-2-camere-militari-gorjului-zKWb2Q";
+		String link = "https://www.anuntul.ro/anunt-vanzare-garsoniera-rahova-ansamblu-nou-incalzire-r00rd7#";
 		SearchPage offerPage = new SearchPage(link, new java.util.Date());
 		
 		LandingPage page = scraper.generateLandingPageInfo(offerPage, offerPage.getDateAdded());

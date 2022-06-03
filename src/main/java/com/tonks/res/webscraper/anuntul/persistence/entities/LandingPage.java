@@ -25,16 +25,6 @@ public class LandingPage implements Cloneable, Serializable {
 	@Column(name = "date_added")
 	protected Date dateAdded;
 
-	// start seller area
-	@Column(name = "seller_name")
-	protected String sellerName;
-
-	@Column(name = "seller_type")
-	protected String sellerType;
-
-	@Column(name = "seller_phone")
-	protected String sellerPhone;
-
 	// start breadcrumb area
 	@Column(name = "offerType")
 	protected String offerType; // vanzare/inchiriat
@@ -47,9 +37,6 @@ public class LandingPage implements Cloneable, Serializable {
 
 	@Column(name = "neighborhood")
 	protected String neighborhood;
-
-	@Column(name = "street")
-	protected String street;
 
 	// start main area
 	@Column(name = "title")
@@ -64,26 +51,14 @@ public class LandingPage implements Cloneable, Serializable {
 	@Column(name = "useable_surface")
 	protected Double useableSurface; // Suprafata utila
 
-	@Column(name = "nb_of_rooms")
-	protected Integer roomsNumber; // Numarul de camere
-
-	@Column(name = "condition")
-	protected String condition; // Stare
-
-	@Column(name = "floor_number")
-	protected Integer floorNumber; // Etaj
-
-	@Column(name = "total_floors")
-	protected Integer totalFloors; // Etaje in total
-
-	@Column(name = "building_type")
-	protected String buildingType; // Tip cladire
-
 	@Column(name = "property_type")
 	protected String propertyType; // Tip proprietate
 
 	@Column(name = "partitioning")
 	protected String partitioning; // Compartimentare
+
+	@Column(name = "nb_of_rooms")
+	protected Integer roomsNumber;
 
 	@Column(name = "year_built")
 	protected Integer yearBuilt; // Anul constructiei
@@ -92,8 +67,8 @@ public class LandingPage implements Cloneable, Serializable {
 	@Column(name = "description", length = 15000)
 	protected String description; // Descrierea generala
 
-	@Column(name = "negociable")
-	protected String negociable; // Tip oferta
+	@Column(name = "available")
+	protected Boolean available = true;
 
 	@Column(name = "pictures", length = 16000)
 	protected String pictures;
@@ -104,20 +79,12 @@ public class LandingPage implements Cloneable, Serializable {
 	@Column(name = "longitude")
 	protected Double longitude;
 
-	public Double getLatitude() {
-		return latitude;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public Date getDateAdded() {
@@ -126,38 +93,6 @@ public class LandingPage implements Cloneable, Serializable {
 
 	public void setDateAdded(Date dateAdded) {
 		this.dateAdded = dateAdded;
-	}
-
-	public String getSellerName() {
-		return sellerName;
-	}
-
-	public void setSellerName(String sellerName) {
-		this.sellerName = sellerName;
-	}
-
-	public String getSellerType() {
-		return sellerType;
-	}
-
-	public void setSellerType(String sellerType) {
-		this.sellerType = sellerType;
-	}
-
-	public String getSellerPhone() {
-		return sellerPhone;
-	}
-
-	public void setSellerPhone(String sellerPhone) {
-		this.sellerPhone = sellerPhone;
-	}
-
-	public String getBuildingType() {
-		return buildingType;
-	}
-
-	public void setBuildingType(String buildingType) {
-		this.buildingType = buildingType;
 	}
 
 	public String getOfferType() {
@@ -192,16 +127,16 @@ public class LandingPage implements Cloneable, Serializable {
 		this.neighborhood = neighborhood;
 	}
 
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
 	public String getTitle() {
 		return title;
+	}
+
+	public Integer getRoomsNumber() {
+		return roomsNumber;
+	}
+
+	public void setRoomsNumber(Integer roomsNumber) {
+		this.roomsNumber = roomsNumber;
 	}
 
 	public void setTitle(String title) {
@@ -230,38 +165,6 @@ public class LandingPage implements Cloneable, Serializable {
 
 	public void setUseableSurface(Double useableSurface) {
 		this.useableSurface = useableSurface;
-	}
-
-	public Integer getRoomsNumber() {
-		return roomsNumber;
-	}
-
-	public void setRoomsNumber(Integer roomsNumber) {
-		this.roomsNumber = roomsNumber;
-	}
-
-	public String getCondition() {
-		return condition;
-	}
-
-	public void setCondition(String condition) {
-		this.condition = condition;
-	}
-
-	public Integer getFloorNumber() {
-		return floorNumber;
-	}
-
-	public void setFloorNumber(Integer floorNumber) {
-		this.floorNumber = floorNumber;
-	}
-
-	public Integer getTotalFloors() {
-		return totalFloors;
-	}
-
-	public void setTotalFloors(Integer totalFloors) {
-		this.totalFloors = totalFloors;
 	}
 
 	public String getPropertyType() {
@@ -296,20 +199,12 @@ public class LandingPage implements Cloneable, Serializable {
 		this.description = description;
 	}
 
-	public String getNegociable() {
-		return negociable;
+	public Boolean getAvailable() {
+		return available;
 	}
 
-	public void setNegociable(String negociable) {
-		this.negociable = negociable;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
+	public void setAvailable(Boolean available) {
+		this.available = available;
 	}
 
 	public String getPictures() {
@@ -320,11 +215,27 @@ public class LandingPage implements Cloneable, Serializable {
 		this.pictures = pictures;
 	}
 
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(city, condition, county, currency, dateAdded, description, floorNumber, latitude, longitude,
-				negociable, neighborhood, offerType, partitioning, pictures, price, propertyType, roomsNumber,
-				sellerName, sellerPhone, sellerType, street, title, totalFloors, url, useableSurface, yearBuilt);
+		return Objects.hash(available, city, county, currency, dateAdded, description, latitude, longitude,
+				neighborhood, offerType, partitioning, pictures, price, propertyType, roomsNumber, title, url,
+				useableSurface, yearBuilt);
 	}
 
 	@Override

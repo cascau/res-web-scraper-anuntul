@@ -12,14 +12,19 @@ import org.springframework.stereotype.Component;
 
 import com.tonks.res.webscraper.anuntul.persistence.entities.LandingPage;
 import com.tonks.res.webscraper.anuntul.persistence.entities.SearchPage;
+import com.tonks.res.webscraper.anuntul.to.BreadcrumbTO;
+import com.tonks.res.webscraper.anuntul.to.GeoLocationTO;
+import com.tonks.res.webscraper.anuntul.to.LocationTO;
+import com.tonks.res.webscraper.anuntul.to.TitlePriceCurrencyTO;
+import com.tonks.res.webscraper.anuntul.util.DomParser;
 
 @Component
 public class LandingPageScraper {
 
 	private static final Logger logger = LoggerFactory.getLogger(LandingPageScraper.class);
 
-//	@Autowired
-//	private DomParser domParser;
+	@Autowired
+	private DomParser domParser;
 	
 	public LandingPage generateLandingPageInfo(SearchPage link, Date date) throws IOException {
 
@@ -29,55 +34,32 @@ public class LandingPageScraper {
 
 		page.setDateAdded(date);
 		page.setUrl(link.getUrl());
+
+		BreadcrumbTO breadcrumb = domParser.extractBreadcrumb(doc);
+		TitlePriceCurrencyTO titlePriceCurrency = domParser.extractTitlePriceCurrency(doc);
+		LocationTO location = domParser.extractLocation(doc);
+		Boolean available = domParser.extractAvailable(doc);
+		String pictures = domParser.extractPictures(doc);
+		GeoLocationTO geoLocation = domParser.extractGeolocation(doc);
+		String description = domParser.extractDescription(doc);
 		
-//		SellerDetailsTO sellerDetails = domParser.extractSellerDetails(doc);
-//		BreadcrumbTO breadcrumb = domParser.extractBreadcrumb(doc);
-//		PriceWithCurrencyTO pwc = domParser.extractPriceAndCurrency(doc);
-//		GeneralInfoTO generalInfo = domParser.extractGeneralInfo(doc);
-//		ParticularitiesTO partics = domParser.extractParticularities(doc);
-//
-//		page.setSellerName(sellerDetails.getName());
-//		page.setSellerType(sellerDetails.getType() != null ? sellerDetails.getType() : partics.getSellerType());
-//		page.setSellerPhone(sellerDetails.getPhone());
-//
-//		page.setOfferType(breadcrumb.getOfferType());
-//		page.setCounty(breadcrumb.getCounty());
-//		page.setCity(breadcrumb.getCity());
-//		page.setNeighborhood(breadcrumb.getNeighborhood());
-//		page.setStreet(breadcrumb.getStreet());
-//
-//		page.setPictures(domParser.extractPictures(doc));
-//		page.setTitle(domParser.extractTitle(doc));
-//		page.setPrice(pwc.getPrice());
-//		page.setCurrency(pwc.getCurrency());
-//
-//		page.setTotalSurface(generalInfo.getTotalSurface());
-//		page.setUseableSurface(generalInfo.getUseableSurface());
-//		page.setRoomsNumber(generalInfo.getRoomsNb());
-//		page.setCondition(generalInfo.getCondition());
-//		page.setFloorNumber(generalInfo.getFloorNb());
-//		page.setTotalFloors(generalInfo.getTotalFloors());
-//		page.setExteriorFeatures(generalInfo.getExteriorFeatures());
-//		page.setPropertyType(
-//				generalInfo.getPropertyType() != null ? generalInfo.getPropertyType() : partics.getPropertyType());
-//		page.setPartitioning(
-//				generalInfo.getPartitioning() != null ? generalInfo.getPartitioning() : partics.getPartitioning());
-//		page.setYearBuilt(generalInfo.getYearBuilt() != null ? generalInfo.getYearBuilt() : partics.getYearBuilt());
-//		page.setBathroomsNumber(
-//				generalInfo.getBathroomsNb() != null ? generalInfo.getBathroomsNb() : partics.getBathroomsNumber());
-//		page.setLandSurface(generalInfo.getLandSurface());
-//		page.setParking(generalInfo.getParking());
-//		page.setOrientation(generalInfo.getOrientation());
-//
-//		page.setDescription(domParser.extractDescription(doc));
-//
-//		page.setElevator(partics.getElevator());
-//		page.setCommodities(partics.getCommodities());
-//		page.setSafety(partics.getSafety());
-//		page.setCharacteristics(partics.getCharacteristics());
-//		page.setInfrastructure(partics.getInfrastructure());
-//		page.setSurroundings(partics.getSurroundings());
-//		page.setNegociable(partics.getNegociable());
+		page.setAvailable(available);
+		page.setCity(location.getCity());
+		page.setCounty(location.getCounty());
+		page.setCurrency(titlePriceCurrency.getCurrency());
+		page.setDescription(description);
+		page.setLatitude(geoLocation.getLatitude());
+		page.setLongitude(geoLocation.getLongitude());
+		page.setNeighborhood(location.getNeighborhood());
+		page.setOfferType(breadcrumb.getOfferType());
+		page.setPartitioning(null);
+		page.setPictures(pictures);
+		page.setPrice(titlePriceCurrency.getPrice());
+		page.setPropertyType(breadcrumb.getPropertyType());
+		page.setRoomsNumber(breadcrumb.getRoomsNumber());
+		page.setTitle(titlePriceCurrency.getTitle());
+		page.setUseableSurface(null);
+		page.setYearBuilt(null);
  
 		logger.info("Finished parsing " + link.getUrl());
 		return page;
